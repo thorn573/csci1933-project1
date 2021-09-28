@@ -15,11 +15,12 @@ public class Circle  {
 	public double calculateArea() {
 		return radius * radius * 3.14;
 	}
+
 	public void setColor(Color color) {
 		this.color = color;
 	}
 
-	public void setPos(double newCenterXPosition, double newCenterYPosition) {
+	public void setPos(double newXPos, double newYPos) {
 		this.centerXPosition = newCenterXPosition;
 		this.centerYPosition = newCenterYPosition;
 	}
