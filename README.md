@@ -1,1 +1,1 @@
-# csci1933-project1
+# CSCI 1933 Project 1

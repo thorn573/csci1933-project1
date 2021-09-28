@@ -1,44 +1,63 @@
 public class Triangle {
-	double bottomLeftCornerXPosition, bottomLeftCornerYPosution, width, height;
+	double botLeft_xPos, botLeft_yPos, width, height;
 	Color color;
-	public Triangle(double bottomLeftCornerXPosition, double bottomLeftCornerYPosition,double width, double height) {
-	this.bottomLeftCornerXPosition = bottomLeftCornerXPosition;
-	this.bottomLeftCornerYPosition = bottomLeftCornerYPosition;
-	this.width = width;
-	this.height = height;
+
+	public Triangle(double botLeft_xPos, double botLeft_yPos,double width, double height) {
+		this.botLeft_xPos = botLeft_xPos;
+		this.botLeft_yPos = botLeft_yPos;
+		this.width = width;
+		this.height = height;
+	}
+
+	public double calculatePerimeter() {
+		// Find side length of triangle using the Pythagorean Theorem (a^2 + b^2 = c^2).
+		// Theorem may be used because the geometry of an isoceles triangle dictates
+		// the height vector forms a right angle with the base.
+		double a = width / 2;
+		double b = height;
+		double c = sqrt((a * a) + (b * b)) ; // HOW TO DO SQUARE ROOT, IMPORT MATH?
+
+	}
+
+	public double calculateArea() {
+		return width * height / 2;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public void setPos(double newbotLeft_xPos, double newbotLeft_yPos) {
+		this.botLeft_xPos = newbotLeft_xPos;
+		this.botLeft_yPos = newbotLeft_yPos;
+	}
+	
+	public void setHeight (double newHeight) {
+		this.height = newHeight;
+	}
+
+	public void setWidth (double newWidth) {
+		this.width = newWidth;
+	}
+
+	public Color getColor() {
+		return this.color;
+	}
+
+	public double getXPos() {
+		return this.botLeft_xPos;
+	}
+
+	public double getYPos() {
+		return this.botLeft_yPos;
+	}
+
+	public double getHeight() {
+		return this.height;
+	}
+
+	public double getWidth() {
+		return this.width;
+	}
+
 }
-public double calculatePerimeter() {
-	//TO DO
-}
-public double calculateArea() {
-	return width * height / 2;
-}
-public void setColor(Color color) {
-	this.color = color;
-}
-public void setPos(double newBottomLeftCornerXPosition, double newBottomLeftCornerYPosition) {
-	this.bottomLeftCornerXPosition = newBottomLeftCornerXPosition;
-	this.bottomLeftCornerYPosition = newBottomLeftCornerYPosition;
-}
-public void setHeight (double newHeight) {
-	this.height = newHeight;
-}
-public void setWidth (double newWidth) {
-	this.width = newWidth;
-}
-public Color getColor() {
-	return this.color;
-}
-public double getXPos() {
-	return this.bottomLeftCornerXPosition;
-}
-public double getYPos() {
-	return this.bottomLeftCornerYPosition;
-}
-public double getHeight() {
-	return this.height;
-}
-public double getWidth() {
-	return this.width;
-}
-}// Triangle Class
