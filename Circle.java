@@ -1,10 +1,12 @@
+import java.awt.Color;
+
 public class Circle  {
-	double centerXPosition, centerYPosition, radius;
+	double centerXPos, centerYPos, radius;
 	Color color;
 
-	public Circle (double centerXPosition, double centerYPosition, double radius) {
-		this.centerXPosition = centerXPosition;
-		this.centerYPosition = centerYPosition;
+	public Circle (double centerXPos, double centerYPos, double radius) {
+		this.centerXPos = centerXPos;
+		this.centerYPos = centerYPos;
 		this.radius = radius;
 	}
 
@@ -21,8 +23,8 @@ public class Circle  {
 	}
 
 	public void setPos(double newXPos, double newYPos) {
-		this.centerXPosition = newCenterXPosition;
-		this.centerYPosition = newCenterYPosition;
+		this.centerXPos = newXPos;
+		this.centerYPos = newYPos;
 	}
 
 	public void setRadius(double radius) {
@@ -34,15 +36,18 @@ public class Circle  {
 	}
 
 	public double getXPos() {
-		return this.centerXPosition;
+		return this.centerXPos;
 	}
 
 	public double getYPos() {
-		return this.centerYPosition;
+		return this.centerYPos;
 	}
 
 	public double getRadius() {
 		return this.radius;
+	}
+
+	public static void main(String[] args) {
 	}
 
 }

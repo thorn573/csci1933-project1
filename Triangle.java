@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.lang.Math;
+
 public class Triangle {
 	double botLeft_xPos, botLeft_yPos, width, height;
 	Color color;
@@ -15,8 +18,9 @@ public class Triangle {
 		// the height vector forms a right angle with the base.
 		double a = width / 2;
 		double b = height;
-		double c = sqrt((a * a) + (b * b)) ; // HOW TO DO SQUARE ROOT, IMPORT MATH?
+		double c = Math.sqrt((a * a) + (b * b));
 
+		return c;
 	}
 
 	public double calculateArea() {
@@ -31,7 +35,7 @@ public class Triangle {
 		this.botLeft_xPos = newbotLeft_xPos;
 		this.botLeft_yPos = newbotLeft_yPos;
 	}
-	
+
 	public void setHeight (double newHeight) {
 		this.height = newHeight;
 	}
@@ -58,6 +62,9 @@ public class Triangle {
 
 	public double getWidth() {
 		return this.width;
+	}
+
+	public static void main(String[] args) {
 	}
 
 }

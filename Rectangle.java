@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Rectangle {
   double topLeft_xPos, topLeft_yPos, width, height;
   Color color;
@@ -53,5 +55,8 @@ public class Rectangle {
   public double getHeight() {
     return this.height;
   }
+
+  public static void main(String[] args) {
+	}
 
 }
