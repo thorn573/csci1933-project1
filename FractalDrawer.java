@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class FractalDrawer {
     private double totalArea = 0;  // member variable for tracking the total area
     private Color[] colorCycle = {Color.red, Color.green, Color.blue};
-    private int colorIndex = 0;
 
     public FractalDrawer() {}  // contructor
 
@@ -18,11 +17,11 @@ public class FractalDrawer {
 
       switch (type) {
         case "circle": {
-          System.out.println("Shape is a circle");
+          drawCircleFractal(300, 400, 400, colorCycle[0], 0, myCanvas, 7);
           break;
         }
         case "triangle": {
-          drawTriangleFractal(200, 200, 300, 500, colorCycle[colorIndex], myCanvas, 7);
+          drawTriangleFractal(200, 200, 300, 500, colorCycle[0], 0, myCanvas, 7);
           break;
         }
         case "rectangle": {
@@ -35,11 +34,8 @@ public class FractalDrawer {
       return 1.0;
     }
 
-    //TODO:
     // drawTriangleFractal draws a triangle fractal using recursive techniques
-    public void drawTriangleFractal(double width, double height, double x, double y, Color c, Canvas canvas, int level) {
-      // Triangle constructor parameters = (double botLeft_xPos, double botLeft_yPos, double width, double height)
-
+    public void drawTriangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
       // 1) draw triangle for this cycle
       Triangle newTriangle = new Triangle(x, y, width, height);
       newTriangle.setColor(c);
@@ -52,32 +48,68 @@ public class FractalDrawer {
 
         double newWidth = width / 2;
         double newHeight = height / 2;
-        colorIndex++;
-        if (colorIndex > colorCycle.length - 1) {
-          colorIndex = 0;
+        cIndex++;
+        if (cIndex > colorCycle.length - 1) {
+          cIndex = 0;
         }
-        Color newColor = colorCycle[colorIndex];
+        Color newColor = colorCycle[cIndex];
 
         // 2) start cycle for left triangle
-        double leftTriangle_XPos = x - newWidth;
-        double leftTriangle_YPos = y;
-        drawTriangleFractal(newWidth, newHeight, leftTriangle_XPos, leftTriangle_YPos, newColor, canvas, level);
+        double leftTriangle_xPos = x - newWidth;
+        double leftTriangle_yPos = y;
+        drawTriangleFractal(newWidth, newHeight, leftTriangle_xPos, leftTriangle_yPos, newColor, cIndex, canvas, level);
 
         // 3) start cycle for right triangle
-        double rightTriangle_XPos = x + width;
-        double rightTriangle_YPos = y;
-        drawTriangleFractal(newWidth, newHeight, rightTriangle_XPos, rightTriangle_YPos, newColor, canvas, level);
+        double rightTriangle_xPos = x + width;
+        double rightTriangle_yPos = y;
+        drawTriangleFractal(newWidth, newHeight, rightTriangle_xPos, rightTriangle_yPos, newColor, cIndex, canvas, level);
 
         // 4) start crycle for top triangle
-        double topTriangle_XPos = x + (width / 2) - (newWidth / 2);
-        double topTriangle_YPos = y - height;
-        drawTriangleFractal(newWidth, newHeight, topTriangle_XPos, topTriangle_YPos, newColor, canvas, level);
+        double topTriangle_xPos = x + (width / 2) - (newWidth / 2);
+        double topTriangle_yPos = y - height;
+        drawTriangleFractal(newWidth, newHeight, topTriangle_xPos, topTriangle_yPos, newColor, cIndex, canvas, level);
       }
     }
 
-    // TODO:
     // drawCircleFractal draws a circle fractal using recursive techniques
-    public void drawCircleFractal(double radius, double x, double y, Color c, Canvas canvas, int level) {
+    public void drawCircleFractal(double radius, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
+      // 1) draw circle for this cycle
+      Circle newCircle = new Circle(x, y, radius);
+      newCircle.setColor(c);
+      canvas.drawShape(newCircle);
+
+      if (level == 0) {
+        return;
+      } else {
+        level--;
+
+        double newRadius = radius / 2;
+        cIndex++;
+        if (cIndex > colorCycle.length - 1) {
+          cIndex = 0;
+        }
+        Color newColor = colorCycle[cIndex];
+
+        // 2) start cycle for left circle
+        double leftCircle_xPos = x - radius + newRadius;
+        double leftCircle_yPos = y;
+        drawCircleFractal(newRadius, leftCircle_xPos, leftCircle_yPos, newColor, cIndex, canvas, level);
+
+        // 3) start cycle for right circle
+        double rightCircle_xPos = x + radius - newRadius;
+        double rightCircle_yPos = y;
+        drawCircleFractal(newRadius, rightCircle_xPos, rightCircle_yPos, newColor, cIndex, canvas, level);
+
+        // 4) start cycle for top circle
+        double topCircle_xPos = x;
+        double topCircle_yPos = y - radius + newRadius;
+        drawCircleFractal(newRadius, topCircle_xPos, topCircle_yPos, newColor, cIndex, canvas, level);
+
+        // 5) start cycle for bottom circle
+        double bottomCircle_xPos = x;
+        double bottomCircle_yPos = y + radius - newRadius;
+        drawCircleFractal(newRadius, bottomCircle_xPos, bottomCircle_yPos, newColor, cIndex, canvas, level);
+      }
     }
 
     //TODO:
