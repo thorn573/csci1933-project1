@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.util.concurrent.*;
- 
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ListIterator;
@@ -10,13 +10,13 @@ import javax.swing.JFrame;
 
 public class Canvas extends JApplet {
 
-	
+
 	private int height;
 	private int width;
 	private CopyOnWriteArrayList<Circle> circles;
 	private CopyOnWriteArrayList<Triangle> triangles;
 	private CopyOnWriteArrayList<Rectangle> rectangles;
-	
+
 	public Canvas() {
 		JFrame f = new JFrame("Canvas");
 		f.addWindowListener(new WindowAdapter(){
@@ -31,7 +31,7 @@ public class Canvas extends JApplet {
 		triangles = new CopyOnWriteArrayList<Triangle>();
 		f.setVisible(true);
 	}
-	
+
 	public Canvas(int h, int w) {
 		JFrame f = new JFrame("Canvas");
 		f.addWindowListener(new WindowAdapter(){
@@ -46,14 +46,14 @@ public class Canvas extends JApplet {
 		triangles = new CopyOnWriteArrayList<Triangle>();
 		f.setVisible(true);
 	}
-	
+
 	public void paint(Graphics g) {
 		Image buffer = createImage(width,height);
 		drawToBuffer(buffer.getGraphics());
 		g.drawImage(buffer,0,0,null);
 	}
 
-	public void drawToBuffer(Graphics g){	
+	public void drawToBuffer(Graphics g){
 		ListIterator<Circle> circItr = circles.listIterator();
 		ListIterator<Rectangle> recItr = rectangles.listIterator();
 		ListIterator<Triangle> triItr = triangles.listIterator();
@@ -85,25 +85,31 @@ public class Canvas extends JApplet {
 			g.fillPolygon(po);
 		}
 	}
-	
-	
+
+
 	public void drawShape(Circle circ){
 		circles.add(circ);
 	}
-	
+
 	public void drawShape(Rectangle rec){
 		rectangles.add(rec);
 	}
-	
+
 	public void drawShape(Triangle tri){
 		triangles.add(tri);
 	}
-	
+
 	public void clear(){
 		circles.clear();
 		rectangles.clear();
 		triangles.clear();
 	}
-	
+
+  public static void main(String[] args) {
+    Canvas drawing = new Canvas(800, 800);
+    Circle myCircle = new Circle(400, 400, 100);
+    myCircle.setColor(Color.BLUE);
+    drawing.drawShape(myCircle);
+  }
 
 }
