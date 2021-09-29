@@ -223,7 +223,7 @@ public class FractalDrawer {
       Scanner s = new Scanner(System.in);
       String shapeInput = s.nextLine().toLowerCase();
 
-      FractalDrawer drawer = new FractalDrawer(0);
+      FractalDrawer drawer = new FractalDrawer(7);
       double totalArea = drawer.drawFractal(shapeInput);
 
       System.out.print("Total fractal area: " + totalArea + " units squared.");
