@@ -8,24 +8,23 @@ public class FractalDrawer {
 
     public FractalDrawer() {}  // contructor
 
-    //TODO:
     // drawFractal creates a new Canvas object
     // and determines which shapes to draw a fractal by calling appropriate helper function
     // drawFractal returns the area of the fractal
     public double drawFractal(String type) {
-      Canvas myCanvas = new Canvas(800, 800);
+      Canvas myCanvas = new Canvas(600, 600);
 
       switch (type) {
         case "circle": {
-          drawCircleFractal(300, 400, 400, colorCycle[0], 0, myCanvas, 7);
+          drawCircleFractal(250, 300, 300, colorCycle[0], 0, myCanvas, 7);
           break;
         }
         case "triangle": {
-          drawTriangleFractal(200, 200, 300, 500, colorCycle[0], 0, myCanvas, 7);
+          drawTriangleFractal(170, 170, 200, 400, colorCycle[0], 0, myCanvas, 7);
           break;
         }
         case "rectangle": {
-          System.out.println("Shape is a rectangle");
+          drawRectangleFractal(300, 200, 150, 170, colorCycle[0], 0, myCanvas, 7);
           break;
         }
         default: System.out.println("Shape input invalid. Restart program.");
@@ -112,12 +111,48 @@ public class FractalDrawer {
       }
     }
 
-    //TODO:
     // drawRectangleFractal draws a rectangle fractal using recursive techniques
-    public void drawRectangleFractal(double width, double height, double x, double y, Color c, Canvas canvas, int level) {
+    public void drawRectangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
+      // 1) draw circle for this cycle
+      Rectangle newRectangle = new Rectangle(x, y, width, height);
+      newRectangle.setColor(c);
+      canvas.drawShape(newRectangle);
+
+      if (level == 0) {
+        return;
+      } else {
+        level--;
+
+        double newWidth = width / 2;
+        double newHeight = height / 2;
+        cIndex++;
+        if (cIndex > colorCycle.length - 1) {
+          cIndex = 0;
+        }
+        Color newColor = colorCycle[cIndex];
+
+        // 2) start cycle for left rectangle
+        double leftRectangle_xPos = x - newWidth;
+        double leftRectangle_yPos = y + (0.5 * newHeight);
+        drawRectangleFractal(newWidth, newHeight, leftRectangle_xPos, leftRectangle_yPos, newColor, cIndex, canvas, level);
+
+        // 3) start cycle for right rectangle
+        double rightRectangle_xPos = x + width;
+        double rightRectangle_yPos = y + (0.5 * newHeight);
+        drawRectangleFractal(newWidth, newHeight, rightRectangle_xPos, rightRectangle_yPos, newColor, cIndex, canvas, level);
+
+        // 4) start cycle for top rectangle
+        double topRectangle_xPos = x + (0.5 * newWidth);
+        double topRectangle_yPos = y - newHeight;
+        drawRectangleFractal(newWidth, newHeight, topRectangle_xPos, topRectangle_yPos, newColor, cIndex, canvas, level);
+
+        // 5) start cycle for bottom rectangle
+        double bottomRectangle_xPos = x + (0.5 * newWidth);
+        double bottomRectangle_yPos = y + height;
+        drawRectangleFractal(newWidth, newHeight, bottomRectangle_xPos, bottomRectangle_yPos, newColor, cIndex, canvas, level);
+      }
     }
 
-    //TODO:
     // main should ask user for shape input, and then draw the corresponding fractal.
     // should print area of fractal
     public static void main(String[] args){
@@ -128,8 +163,6 @@ public class FractalDrawer {
 
       FractalDrawer drawer = new FractalDrawer();
       drawer.drawFractal(shapeInput);
-
-      System.out.println("Shape input: " + shapeInput);
 
     }
 }
