@@ -5,7 +5,7 @@ public class Triangle {
 	double botLeft_xPos, botLeft_yPos, width, height;
 	Color color;
 
-	public Triangle(double botLeft_xPos, double botLeft_yPos,double width, double height) {
+	public Triangle(double botLeft_xPos, double botLeft_yPos, double width, double height) {
 		this.botLeft_xPos = botLeft_xPos;
 		this.botLeft_yPos = botLeft_yPos;
 		this.width = width;

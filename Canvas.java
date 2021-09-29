@@ -106,10 +106,10 @@ public class Canvas extends JApplet {
 	}
 
   public static void main(String[] args) {
-    Canvas drawing = new Canvas(800, 800);
+    Canvas canvas = new Canvas(800, 800);
     Circle myCircle = new Circle(400, 400, 100);
     myCircle.setColor(Color.BLUE);
-    drawing.drawShape(myCircle);
+    canvas.drawShape(myCircle);
   }
 
 }
