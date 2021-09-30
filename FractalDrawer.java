@@ -11,96 +11,39 @@ public class FractalDrawer {
       this.levels = levels;
     }  // contructor
 
-    public double findCircleFractalArea(double radius) {
-      double area = 0.0;
-      int count = 0;
-
-      while (count <= levels) {
-        count++;
-
-        Circle tempCircle = new Circle(0, 0, radius);
-        area += tempCircle.calculateArea();
-
-        radius = radius / 2;
-      }
-
-      return area;
-    }
-
-    public double findTriangleFractalArea(double width, double height) {
-      double area = 0.0;
-      int count = 0;
-
-      while (count <= levels) {
-        count++;
-
-        Triangle tempTriangle = new Triangle(0, 0, width, height);
-        area += tempTriangle.calculateArea();
-
-        width = width / 2;
-        height = height / 2;
-      }
-
-      return area;
-    }
-
-    public double findRectangleFractalArea(double width, double height) {
-      double area = 0.0;
-      int count = 0;
-
-      while (count <= levels) {
-        count++;
-
-        Rectangle tempRectangle = new Rectangle(0, 0, width, height);
-        area += tempRectangle.calculateArea();
-
-        width = width / 2;
-        height = height / 2;
-      }
-
-      return area;
-    }
-
     // drawFractal creates a new Canvas object
     // and determines which shapes to draw a fractal by calling appropriate helper function
     // drawFractal returns the area of the fractal
     public double drawFractal(String type) {
       Canvas myCanvas = new Canvas(600, 600);
-      double area = 0.0;
 
       switch (type) {
         case "circle": {
-          int radius = 250;
-          area = findCircleFractalArea(radius);
-          drawCircleFractal(radius, 300, 300, colorCycle[0], 0, myCanvas, levels);
+          drawCircleFractal(250, 300, 300, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         case "triangle": {
-          int width = 170;
-          int height = 170;
-          area = findTriangleFractalArea(width, height);
-          drawTriangleFractal(width, height, 200, 400, colorCycle[0], 0, myCanvas, levels);
+          drawTriangleFractal(170, 170, 200, 400, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         case "rectangle": {
-          int width = 300;
-          int height = 200;
-          area = findRectangleFractalArea(width, height);
-          drawRectangleFractal(width, height, 150, 170, colorCycle[0], 0, myCanvas, levels);
+          drawRectangleFractal(300, 200, 150, 170, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         default: System.out.println("Shape input invalid. Restart program.");
       }
 
-      return area;
+      return totalArea;
     }
 
     // drawTriangleFractal draws a triangle fractal using recursive techniques
     public void drawTriangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
-      // 1) draw triangle for this cycle
+      // 1) draw triangle for this cycle & add its area to the total area
       Triangle newTriangle = new Triangle(x, y, width, height);
       newTriangle.setColor(c);
       canvas.drawShape(newTriangle);
+
+      totalArea += newTriangle.calculateArea();
 
       if (level == 0) {
         return;
@@ -134,10 +77,12 @@ public class FractalDrawer {
 
     // drawCircleFractal draws a circle fractal using recursive techniques
     public void drawCircleFractal(double radius, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
-      // 1) draw circle for this cycle
+      // 1) draw circle for this cycle & add its area to the total area
       Circle newCircle = new Circle(x, y, radius);
       newCircle.setColor(c);
       canvas.drawShape(newCircle);
+
+      totalArea += newCircle.calculateArea();
 
       if (level == 0) {
         return;
@@ -175,10 +120,12 @@ public class FractalDrawer {
 
     // drawRectangleFractal draws a rectangle fractal using recursive techniques
     public void drawRectangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
-      // 1) draw circle for this cycle
+      // 1) draw circle for this cycle & add its area to the total area
       Rectangle newRectangle = new Rectangle(x, y, width, height);
       newRectangle.setColor(c);
       canvas.drawShape(newRectangle);
+
+      totalArea += newRectangle.calculateArea();
 
       if (level == 0) {
         return;
