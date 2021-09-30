@@ -19,7 +19,7 @@ public class FractalDrawer {
 
       switch (type) {
         case "circle": {
-          drawCircleFractal(250, 300, 300, colorCycle[0], 0, myCanvas, levels);
+          drawCircleFractal(100, 300, 300, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         case "triangle": {
@@ -97,23 +97,23 @@ public class FractalDrawer {
         Color newColor = colorCycle[cIndex];
 
         // 2) start cycle for left circle
-        double leftCircle_xPos = x - radius + newRadius;
+        double leftCircle_xPos = x - radius - newRadius;
         double leftCircle_yPos = y;
         drawCircleFractal(newRadius, leftCircle_xPos, leftCircle_yPos, newColor, cIndex, canvas, level);
 
         // 3) start cycle for right circle
-        double rightCircle_xPos = x + radius - newRadius;
+        double rightCircle_xPos = x + radius + newRadius;
         double rightCircle_yPos = y;
         drawCircleFractal(newRadius, rightCircle_xPos, rightCircle_yPos, newColor, cIndex, canvas, level);
 
         // 4) start cycle for top circle
         double topCircle_xPos = x;
-        double topCircle_yPos = y - radius + newRadius;
+        double topCircle_yPos = y - radius - newRadius;
         drawCircleFractal(newRadius, topCircle_xPos, topCircle_yPos, newColor, cIndex, canvas, level);
 
         // 5) start cycle for bottom circle
         double bottomCircle_xPos = x;
-        double bottomCircle_yPos = y + radius - newRadius;
+        double bottomCircle_yPos = y + radius + newRadius;
         drawCircleFractal(newRadius, bottomCircle_xPos, bottomCircle_yPos, newColor, cIndex, canvas, level);
       }
     }
