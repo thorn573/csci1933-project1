@@ -13,14 +13,15 @@ public class Triangle {
 	}
 
 	public double calculatePerimeter() {
-		// Find side length of triangle using the Pythagorean Theorem (a^2 + b^2 = c^2).
+		// Find the side length of triangle using the Pythagorean Theorem (a^2 + b^2 = c^2).
 		// Theorem may be used because the geometry of an isoceles triangle dictates
-		// the height vector forms a right angle with the base.
+		// the height vector forms a right angle with the base thus splitting the triangle
+		// into two right triangles.
 		double a = width / 2;
 		double b = height;
 		double c = Math.sqrt((a * a) + (b * b));
 
-		return c;
+		return (2 * c) + width;
 	}
 
 	public double calculateArea() {
