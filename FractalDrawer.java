@@ -1,33 +1,32 @@
-// FractalDrawer class draws a fractal of a shape indicated by user input
+// Written by Khoi Le (le000171)
+// Written by Jessica Thorne (thorn573)
+
 import java.awt.Color;
 import java.util.Scanner;
 
 public class FractalDrawer {
-    private double totalArea = 0;  // member variable for tracking the total area
+    private double totalArea = 0;
     private Color[] colorCycle = {Color.red, Color.green, Color.blue};
     private int levels;
 
-    public FractalDrawer(int levels) {
-      this.levels = levels;
-    }  // contructor
+    public FractalDrawer(int l) {
+      levels = l;
+    }
 
-    // drawFractal creates a new Canvas object
-    // and determines which shapes to draw a fractal by calling appropriate helper function
-    // drawFractal returns the area of the fractal
     public double drawFractal(String type) {
-      Canvas myCanvas = new Canvas(600, 600);
+      Canvas myCanvas = new Canvas();
 
       switch (type) {
         case "circle": {
-          drawCircleFractal(100, 300, 300, colorCycle[0], 0, myCanvas, levels);
+          drawCircleFractal(100, 400, 400, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         case "triangle": {
-          drawTriangleFractal(170, 170, 200, 400, colorCycle[0], 0, myCanvas, levels);
+          drawTriangleFractal(170, 170, 300, 500, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         case "rectangle": {
-          drawRectangleFractal(300, 200, 150, 170, colorCycle[0], 0, myCanvas, levels);
+          drawRectangleFractal(300, 200, 250, 220, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         default: System.out.println("Shape input invalid. Restart program.");
@@ -36,20 +35,23 @@ public class FractalDrawer {
       return totalArea;
     }
 
-    // drawTriangleFractal draws a triangle fractal using recursive techniques
     public void drawTriangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
-      // 1) draw triangle for this cycle & add its area to the total area
+      // 1) Draw triangle for this fractal cycle
       Triangle newTriangle = new Triangle(x, y, width, height);
       newTriangle.setColor(c);
       canvas.drawShape(newTriangle);
 
+      // 2) Add new triangles area to fractals total area
       totalArea += newTriangle.calculateArea();
 
       if (level == 0) {
+        // Base case is the last layer of the fractal.
+        // No new triangles need to be calculated or drawn.
         return;
       } else {
         level--;
 
+        // 3) Find width, height & color of new triangles
         double newWidth = width / 2;
         double newHeight = height / 2;
         cIndex++;
@@ -58,37 +60,40 @@ public class FractalDrawer {
         }
         Color newColor = colorCycle[cIndex];
 
-        // 2) start cycle for left triangle
-        double leftTriangle_xPos = x - newWidth;
-        double leftTriangle_yPos = y;
-        drawTriangleFractal(newWidth, newHeight, leftTriangle_xPos, leftTriangle_yPos, newColor, cIndex, canvas, level);
+        // 4) Start fractal cycle for new left positioned triangle
+        double leftTriangleXPos = x - newWidth;
+        double leftTriangleYPos = y;
+        drawTriangleFractal(newWidth, newHeight, leftTriangleXPos, leftTriangleYPos, newColor, cIndex, canvas, level);
 
-        // 3) start cycle for right triangle
-        double rightTriangle_xPos = x + width;
-        double rightTriangle_yPos = y;
-        drawTriangleFractal(newWidth, newHeight, rightTriangle_xPos, rightTriangle_yPos, newColor, cIndex, canvas, level);
+        // 5) Start fractal cycle for new right positioned triangle
+        double rightTriangleXPos = x + width;
+        double rightTriangleYPos = y;
+        drawTriangleFractal(newWidth, newHeight, rightTriangleXPos, rightTriangleYPos, newColor, cIndex, canvas, level);
 
-        // 4) start crycle for top triangle
-        double topTriangle_xPos = x + (width / 2) - (newWidth / 2);
-        double topTriangle_yPos = y - height;
-        drawTriangleFractal(newWidth, newHeight, topTriangle_xPos, topTriangle_yPos, newColor, cIndex, canvas, level);
+        // 6) Start fractal cycle for new top positioned triangle
+        double topTriangleXPos = x + (width / 2) - (newWidth / 2);
+        double topTriangleYPos = y - height;
+        drawTriangleFractal(newWidth, newHeight, topTriangleXPos, topTriangleYPos, newColor, cIndex, canvas, level);
       }
     }
 
-    // drawCircleFractal draws a circle fractal using recursive techniques
     public void drawCircleFractal(double radius, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
-      // 1) draw circle for this cycle & add its area to the total area
+      // 1) Draw circle for this fractal cycle
       Circle newCircle = new Circle(x, y, radius);
       newCircle.setColor(c);
       canvas.drawShape(newCircle);
 
+      // 2) Add new circles area to fractals total area
       totalArea += newCircle.calculateArea();
 
       if (level == 0) {
+        // Base case is the last layer of the fractal.
+        // No new circles need to be calculated or drawn.
         return;
       } else {
         level--;
 
+        // 3) Find radius & color of new circles
         double newRadius = radius / 2;
         cIndex++;
         if (cIndex > colorCycle.length - 1) {
@@ -96,42 +101,45 @@ public class FractalDrawer {
         }
         Color newColor = colorCycle[cIndex];
 
-        // 2) start cycle for left circle
-        double leftCircle_xPos = x - radius - newRadius;
-        double leftCircle_yPos = y;
-        drawCircleFractal(newRadius, leftCircle_xPos, leftCircle_yPos, newColor, cIndex, canvas, level);
+        // 4) Start fractal cycle for new left positioned circle
+        double leftCircleXPos = x - radius - newRadius;
+        double leftCircleYPos = y;
+        drawCircleFractal(newRadius, leftCircleXPos, leftCircleYPos, newColor, cIndex, canvas, level);
 
-        // 3) start cycle for right circle
-        double rightCircle_xPos = x + radius + newRadius;
-        double rightCircle_yPos = y;
-        drawCircleFractal(newRadius, rightCircle_xPos, rightCircle_yPos, newColor, cIndex, canvas, level);
+        // 5) Start fractal cycle for new right positioned circle
+        double rightCircleXPos = x + radius + newRadius;
+        double rightCircleYPos = y;
+        drawCircleFractal(newRadius, rightCircleXPos, rightCircleYPos, newColor, cIndex, canvas, level);
 
-        // 4) start cycle for top circle
-        double topCircle_xPos = x;
-        double topCircle_yPos = y - radius - newRadius;
-        drawCircleFractal(newRadius, topCircle_xPos, topCircle_yPos, newColor, cIndex, canvas, level);
+        // 6) Start fractal cycle for new top positioned circle
+        double topCircleXPos = x;
+        double topCircleYPos = y - radius - newRadius;
+        drawCircleFractal(newRadius, topCircleXPos, topCircleYPos, newColor, cIndex, canvas, level);
 
-        // 5) start cycle for bottom circle
-        double bottomCircle_xPos = x;
-        double bottomCircle_yPos = y + radius + newRadius;
-        drawCircleFractal(newRadius, bottomCircle_xPos, bottomCircle_yPos, newColor, cIndex, canvas, level);
+        // 7) Start fractal cycle for new bottom positioned circle
+        double bottomCircleXPos = x;
+        double bottomCircleYPos = y + radius + newRadius;
+        drawCircleFractal(newRadius, bottomCircleXPos, bottomCircleYPos, newColor, cIndex, canvas, level);
       }
     }
 
-    // drawRectangleFractal draws a rectangle fractal using recursive techniques
     public void drawRectangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
-      // 1) draw circle for this cycle & add its area to the total area
+      // 1) Draw rectangle for this fractal cycle
       Rectangle newRectangle = new Rectangle(x, y, width, height);
       newRectangle.setColor(c);
       canvas.drawShape(newRectangle);
 
+      // 2) Add new rectangles area to fractals total area
       totalArea += newRectangle.calculateArea();
 
       if (level == 0) {
+        // Base case is the last layer of the fractal.
+        // No new rectangles need to be calculated or drawn.
         return;
       } else {
         level--;
 
+        // 3) Find width, height & color of new rectangles
         double newWidth = width / 2;
         double newHeight = height / 2;
         cIndex++;
@@ -140,30 +148,28 @@ public class FractalDrawer {
         }
         Color newColor = colorCycle[cIndex];
 
-        // 2) start cycle for left rectangle
-        double leftRectangle_xPos = x - newWidth;
-        double leftRectangle_yPos = y + (0.5 * newHeight);
-        drawRectangleFractal(newWidth, newHeight, leftRectangle_xPos, leftRectangle_yPos, newColor, cIndex, canvas, level);
+        // 4) Start fractal cycle for new left positioned rectangle
+        double leftRectangleXPos = x - newWidth;
+        double leftRectangleYPos = y + (0.5 * newHeight);
+        drawRectangleFractal(newWidth, newHeight, leftRectangleXPos, leftRectangleYPos, newColor, cIndex, canvas, level);
 
-        // 3) start cycle for right rectangle
-        double rightRectangle_xPos = x + width;
-        double rightRectangle_yPos = y + (0.5 * newHeight);
-        drawRectangleFractal(newWidth, newHeight, rightRectangle_xPos, rightRectangle_yPos, newColor, cIndex, canvas, level);
+        // 5) Start fractal cycle for new right positioned rectangle
+        double rightRectangleXPos = x + width;
+        double rightRectangleYPos = y + (0.5 * newHeight);
+        drawRectangleFractal(newWidth, newHeight, rightRectangleXPos, rightRectangleYPos, newColor, cIndex, canvas, level);
 
-        // 4) start cycle for top rectangle
-        double topRectangle_xPos = x + (0.5 * newWidth);
-        double topRectangle_yPos = y - newHeight;
-        drawRectangleFractal(newWidth, newHeight, topRectangle_xPos, topRectangle_yPos, newColor, cIndex, canvas, level);
+        // 6) Start fractal cycle for new top positioned rectangle
+        double topRectangleXPos = x + (0.5 * newWidth);
+        double topRectangleYPos = y - newHeight;
+        drawRectangleFractal(newWidth, newHeight, topRectangleXPos, topRectangleYPos, newColor, cIndex, canvas, level);
 
-        // 5) start cycle for bottom rectangle
-        double bottomRectangle_xPos = x + (0.5 * newWidth);
-        double bottomRectangle_yPos = y + height;
-        drawRectangleFractal(newWidth, newHeight, bottomRectangle_xPos, bottomRectangle_yPos, newColor, cIndex, canvas, level);
+        // 7) Start fractal cycle for new bottom positioned rectangle
+        double bottomRectangleXPos = x + (0.5 * newWidth);
+        double bottomRectangleYPos = y + height;
+        drawRectangleFractal(newWidth, newHeight, bottomRectangleXPos, bottomRectangleYPos, newColor, cIndex, canvas, level);
       }
     }
 
-    // main should ask user for shape input, and then draw the corresponding fractal.
-    // should print area of fractal
     public static void main(String[] args){
       System.out.println("Shape Options: \n - Circle \n - Triangle \n - Rectangle");
       System.out.print("Enter shape for fractal drawing: ");
@@ -175,4 +181,5 @@ public class FractalDrawer {
 
       System.out.print("Total fractal area: " + totalArea + " units squared.");
     }
-}
+
+} // FractalDrawer Class
