@@ -1,5 +1,4 @@
 // Written by Khoi Le (le000171)
-// Written by Jessica Thorne (thorn573)
 
 import java.awt.Color;
 import java.lang.Math;
