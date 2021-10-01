@@ -1,3 +1,6 @@
+// Written by Khoi Le (le000171)
+// Written by Jessica Thorne (thorn573)
+
 import java.awt.Color;
 import java.lang.Math;
 
@@ -66,7 +69,7 @@ public class Triangle {
 	}
 
 	public static void main(String[] args) {
-		// Test for Triangle Class:
+		// Tests for Triangle Class:
 		Triangle myTriangle = new Triangle(1.2, 4.5, 2.1, 6.5);
 
 		// 1) Calculate perimeter
@@ -93,6 +96,7 @@ public class Triangle {
 		System.out.println("Old triangle height: " + myTriangle.getHeight());
 		myTriangle.setHeight(6.7);
 		System.out.println("New triangle height: " + myTriangle.getHeight());
+
 	}
 
-}
+} // Triangle Class
