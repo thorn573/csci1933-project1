@@ -1,53 +1,79 @@
+// Written by Khoi Le (le000171)
+// Written by Jessica Thorne (thorn573)
+
 import java.awt.Color;
 
 public class Circle  {
-	double centerXPos, centerYPos, radius;
-	Color color;
+	private double centerXPos, centerYPos, radius;
+	private Color color;
 
-	public Circle (double centerXPos, double centerYPos, double radius) {
-		this.centerXPos = centerXPos;
-		this.centerYPos = centerYPos;
-		this.radius = radius;
+	public Circle (double x, double y, double r) {
+		centerXPos = x;
+		centerYPos = y;
+		radius = r;
 	}
 
 	public double calculatePerimeter() {
-		return radius * 2 * 3.14;
+		return (2 * radius) * 3.14;
 	}
 
 	public double calculateArea() {
-		return radius * radius * 3.14;
+		return (radius * radius) * 3.14;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
+	public void setColor(Color newC) {
+		color = newC;
 	}
 
-	public void setPos(double newXPos, double newYPos) {
-		this.centerXPos = newXPos;
-		this.centerYPos = newYPos;
+	public void setPos(double newX, double newY) {
+		centerXPos = newX;
+		centerYPos = newY;
 	}
 
-	public void setRadius(double radius) {
-		this.radius = radius;
+	public void setRadius(double newR) {
+		radius = newR;
 	}
 
 	public Color getColor() {
-		return this.color;
+		return color;
 	}
 
 	public double getXPos() {
-		return this.centerXPos;
+		return centerXPos;
 	}
 
 	public double getYPos() {
-		return this.centerYPos;
+		return centerYPos;
 	}
 
 	public double getRadius() {
-		return this.radius;
+		return radius;
 	}
 
 	public static void main(String[] args) {
+		// Tests for Circle Class:
+		Circle myCircle = new Circle(1.3, 4.7, 3.8);
+
+		// 1) Perimeter
+		System.out.println("Circle perimeter: " + myCircle.calculatePerimeter());
+
+		// 2) Area
+		System.out.println("Circle area: " + myCircle.calculateArea());
+
+		// 3) Setting & getting color
+		myCircle.setColor(Color.blue);
+		System.out.println("Circle color: " + myCircle.getColor());
+
+		// 4) Setting & getting a new position
+		System.out.println("Old circle position: (" + myCircle.getXPos() + ", " + myCircle.getYPos() + ")");
+		myCircle.setPos(1.6, 8.9);
+		System.out.println("New circle position: (" + myCircle.getXPos() + ", " + myCircle.getYPos() + ")");
+
+		// 5) Setting & getting a new radius
+		System.out.println("Old circle radius: " + myCircle.getRadius());
+		myCircle.setRadius(9.3);
+		System.out.println("New circle radius: " + myCircle.getRadius());
+
 	}
 
-}
+} // Circle Class
