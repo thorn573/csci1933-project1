@@ -54,22 +54,22 @@ public class Circle  {
 		// Tests for Circle Class:
 		Circle myCircle = new Circle(1.3, 4.7, 3.8);
 
-		// 1) Perimeter
+		// 1) Calculate perimeter
 		System.out.println("Circle perimeter: " + myCircle.calculatePerimeter());
 
-		// 2) Area
+		// 2) Calculate area
 		System.out.println("Circle area: " + myCircle.calculateArea());
 
 		// 3) Setting & getting color
 		myCircle.setColor(Color.blue);
 		System.out.println("Circle color: " + myCircle.getColor());
 
-		// 4) Setting & getting a new position
+		// 4) Setting & getting new position
 		System.out.println("Old circle position: (" + myCircle.getXPos() + ", " + myCircle.getYPos() + ")");
 		myCircle.setPos(1.6, 8.9);
 		System.out.println("New circle position: (" + myCircle.getXPos() + ", " + myCircle.getYPos() + ")");
 
-		// 5) Setting & getting a new radius
+		// 5) Setting & getting new radius
 		System.out.println("Old circle radius: " + myCircle.getRadius());
 		myCircle.setRadius(9.3);
 		System.out.println("New circle radius: " + myCircle.getRadius());
