@@ -37,4 +37,4 @@ I have both read and followed the course policies in the 'Academic Integrity - C
 section of the course syllabus.
 
   Signed: Jessica Thorne 10/1/2021
-  Signed:
+  Signed: Khoi Le 10/03/2021
