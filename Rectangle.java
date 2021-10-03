@@ -11,7 +11,7 @@ public class Rectangle {
     topLeftYPos = y;
     width = w;
     height = h;
-  }
+  } // Constructor 
 
   public double calculatePerimeter() {
     return (width * 2) + (height * 2);

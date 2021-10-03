@@ -12,7 +12,7 @@ public class Triangle {
 		bottomLeftYPos = y;
 		width = w;
 		height = h;
-	}
+	} // Constructor
 
 	public double calculatePerimeter() {
 		// Find the diagonal side lengths by using the Pythagorean Theorem (a^2 + b^2 = c^2).

@@ -10,8 +10,9 @@ public class FractalDrawer {
 
     public FractalDrawer(int l) {
       levels = l;
-    }
+    } // Constructor
 
+    // Starts fractal recursive chain based on inputted shape type (circle, triangle, or rectangle.)
     public double drawFractal(String type) {
       Canvas myCanvas = new Canvas();
 
@@ -25,7 +26,7 @@ public class FractalDrawer {
           break;
         }
         case "rectangle": {
-          drawRectangleFractal(300, 200, 250, 220, colorCycle[0], 0, myCanvas, levels);
+          drawRectangleFractal(200, 200, 300, 300, colorCycle[0], 0, myCanvas, levels);
           break;
         }
         default: System.out.println("Shape input invalid. Restart program.");
@@ -34,6 +35,7 @@ public class FractalDrawer {
       return totalArea;
     }
 
+    // Draws trangular fractal recursivly.
     public void drawTriangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
       // 1) Draw triangle for this fractal cycle
       Triangle newTriangle = new Triangle(x, y, width, height);
@@ -76,6 +78,7 @@ public class FractalDrawer {
       }
     }
 
+    // Draws circular fractal recursivly.
     public void drawCircleFractal(double radius, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
       // 1) Draw circle for this fractal cycle
       Circle newCircle = new Circle(x, y, radius);
@@ -122,6 +125,7 @@ public class FractalDrawer {
       }
     }
 
+    // Draws rectangular fractal recursivly.
     public void drawRectangleFractal(double width, double height, double x, double y, Color c, int cIndex, Canvas canvas, int level) {
       // 1) Draw rectangle for this fractal cycle
       Rectangle newRectangle = new Rectangle(x, y, width, height);

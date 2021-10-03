@@ -1,6 +1,7 @@
 // Written by Khoi Le (le000171)
 
 import java.awt.Color;
+import java.lang.Math;
 
 public class Circle  {
 	private double centerXPos, centerYPos, radius;
@@ -10,14 +11,14 @@ public class Circle  {
 		centerXPos = x;
 		centerYPos = y;
 		radius = r;
-	}
+	} // Constructor
 
 	public double calculatePerimeter() {
-		return (2 * radius) * 3.14;
+		return (2 * radius) * Math.PI;
 	}
 
 	public double calculateArea() {
-		return (radius * radius) * 3.14;
+		return (radius * radius) * Math.PI;
 	}
 
 	public void setColor(Color newC) {
